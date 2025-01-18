@@ -5,10 +5,13 @@ class OrderedPromise {
         return new Promise((resolve, reject) => {
             this.tasks.push((...args) => {
                 try {
-                    resolve(fun(...args));
+                    const result = fun(...args);
+                    resolve(result);
+                    return result;
                 }
                 catch (e) {
                     reject(e);
+                    throw e;
                 }
             });
         });

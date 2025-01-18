@@ -2,8 +2,8 @@
 <script src="./orderedpromise.js"></script>
 <p>텍스트</p>
 <button onclick="op.resolve()">버튼</button>
-<button onclick="op.resolve(1)" id="button_a">버튼 1</button>
-<button onclick="op.resolve(2)" id="button_b">버튼 2</button>
+<button onclick="console.log(op.resolve(1))" id="button_a">버튼 1</button>
+<button onclick="console.log(op.resolve(2))" id="button_b">버튼 2</button>
 <script>
 const op = new OrderedPromise();
 
