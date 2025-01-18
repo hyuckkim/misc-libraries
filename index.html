@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<script src="./orderedpromise.js"></script>
+<p>텍스트</p>
+<button onclick="op.resolve()">버튼</button>
+<button onclick="op.resolve(1)" id="button_a">버튼 1</button>
+<button onclick="op.resolve(2)" id="button_b">버튼 2</button>
+<script>
+const op = new OrderedPromise();
+
+function text (t) {
+    document.querySelector('p').innerText = t;
+    return op.set(() => {});
+}
+
+function choice (t, a, b) {
+    document.querySelector('p').innerText = t;
+    document.querySelector('#button_a').innerText = a;
+    document.querySelector('#button_b').innerText = b;
+    return op.set(num => {
+        switch (num) {
+            case 1: return a;
+            case 2: return b;
+            default: return undefined;
+        }
+    });
+}
+
+(async () => {
+for (;;) {
+    await text('1번 텍스트 입니다');
+    const choosed = await choice('선택지 입니다', '1번', '2번');
+    if (choosed == '1번') {
+        await text('2번 텍스트 입니다');
+        await text('3번 텍스트 입니다');
+    } else {
+        await text('4번 텍스트 입니다');
+        await text('5번 텍스트 입니다');
+    }
+}
+})();
+</script>
