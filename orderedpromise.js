@@ -3,9 +3,9 @@ class OrderedPromise {
 
     set(fun) {
         return new Promise((resolve, reject) => {
-            this.tasks.push((...args) => {
+            this.tasks.push(async (...args) => {
                 try {
-                    const result = fun(...args);
+                    const result = await fun(...args);
                     resolve(result);
                     return result;
                 }
